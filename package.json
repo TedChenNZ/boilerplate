@@ -8,15 +8,15 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
-    "babel-loader": "^8.0.0-beta.2",
-    "babel-preset-react": "^7.0.0-beta.3",
+    "@babel/core": "7.0.0-beta.54",
+    "@babel/preset-env": "7.0.0-beta.54",
+    "@babel/preset-react": "^7.0.0-beta.54",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "8.0.0-beta.4",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-loader": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "html-webpack-plugin": "^3.2.0",
@@ -24,14 +24,15 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
-    "webpack": "^4.6.0",
+    "webpack": "4.16.1",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.4",
     "webpack-md5-hash": "^0.0.6"
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "build": "NODE_ENV=production webpack --mode production"
+    "build": "NODE_ENV=production webpack --mode production",
+    "lint": "eslint src/**/*.js"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
