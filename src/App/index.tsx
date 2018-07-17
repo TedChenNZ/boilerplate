@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import styles from './styles.scss';
+import * as styles from './styles.scss';
 
 export default class App extends Component {
   render() {
+    console.log('Hello world!');
     return (
       <div className={styles.app}>
-        <Header />
+        <Header title='Typescript is frustrating' />
       </div>
     );
   }

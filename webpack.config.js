@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -24,7 +25,16 @@ const getStyleLoader = () => {
         localIdentName: '[local]___[hash:base64:5]',
       },
     },
-    'sass-loader',
+    {
+      loader: 'sass-loader',
+    },
+    {
+      loader: 'typings-for-css-modules-loader',
+      options: {
+        modules: true,
+        importLoader: 1,
+      },
+    }
   );
   return loader;
 };
@@ -41,11 +51,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.[j|t]s$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
-          'eslint-loader',
+          { loader: 'babel-loader' },
+          { loader: 'ts-loader' },
+          { loader: 'eslint-loader', options: { transpileOnly: true } },
         ],
       },
       {
@@ -55,6 +66,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new CleanWebpackPlugin('dist', {}),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[contenthash].css',
