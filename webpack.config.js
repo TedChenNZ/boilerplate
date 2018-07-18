@@ -18,50 +18,47 @@ const getStyleLoader = () => {
   }
   loader.push(
     {
-      loader: 'css-loader',
-      options: {
-        modules: true,
-        importLoader: 1,
-        localIdentName: '[local]___[hash:base64:5]',
-      },
-    },
-    {
-      loader: 'sass-loader',
-    },
-    {
       loader: 'typings-for-css-modules-loader',
       options: {
         modules: true,
         importLoader: 1,
-      },
-    }
+        namedExport: true,
+        camelCase: true,
+        localIdentName: '[local]___[hash:base64:5]',
+        sass: true,
+      }
+    },
+    'sass-loader',
   );
   return loader;
 };
 
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: './src/index.tsx',
   },
   devtool: devMode ? 'inline-source-map' : '',
   devServer: {
     contentBase: './dist',
     hot: true,
   },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.css', '.scss']
+  },
   module: {
     rules: [
       {
-        test: /\.[j|t]s$/,
+        test: /\.s?css$/,
+        use: getStyleLoader(),
+      },
+      {
+        test: /\.[j|t]sx?$/,
         exclude: /node_modules/,
         use: [
           { loader: 'babel-loader' },
           { loader: 'ts-loader' },
           { loader: 'eslint-loader', options: { transpileOnly: true } },
         ],
-      },
-      {
-        test: /\.s?css$/,
-        use: getStyleLoader(),
       },
     ],
   },
