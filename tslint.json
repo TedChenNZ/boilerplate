@@ -9,6 +9,7 @@
       true,
       "single"
     ],
+    "member-access": false,
     "no-console": false
   }
 }
