@@ -5,9 +5,10 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "es6",
-    "target": "es5",
+    "target": "es6",
     "allowJs": true,
     "jsx": "react",
+    "experimentalDecorators": true,
     "moduleResolution": "node"
   },
   "include": [
