@@ -4,8 +4,12 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": false,
-    "module": "es6",
-    "target": "es6",
+    "module": "esnext",
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "allowJs": true,
     "jsx": "react",
     "experimentalDecorators": true,

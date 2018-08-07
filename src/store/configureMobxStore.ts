@@ -1,5 +1,4 @@
-import AppStore from "./appStore";
-
+import AppStore from './appStore';
 
 export default function configureMobxStore() {
 

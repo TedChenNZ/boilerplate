@@ -52,12 +52,18 @@ module.exports = {
         use: getStyleLoader(),
       },
       {
-        test: /\.[j|t]sx?$/,
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'ts-loader', options: { transpileOnly: true } },
+        ],
+      },
+      {
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
           { loader: 'babel-loader' },
-          { loader: 'ts-loader' },
-          { loader: 'eslint-loader', options: { transpileOnly: true } },
+          { loader: 'eslint-loader' },
         ],
       },
     ],

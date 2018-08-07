@@ -1,6 +1,5 @@
-import { observable, action, configure, runInAction } from 'mobx';
+import { action, configure, observable, runInAction } from 'mobx';
 configure({ enforceActions: true });
-
 
 export default class AppStore {
 

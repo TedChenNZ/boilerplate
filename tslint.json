@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react"
+  ],
+  "rules": {
+    // override tslint-react rules here
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "no-console": false
+  }
+}

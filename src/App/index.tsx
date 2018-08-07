@@ -3,7 +3,7 @@ import Header from './Header';
 import styles from './styles.scss';
 
 export default class App extends Component {
-  render() {
+  public render() {
     console.log('Hello world!');
     return (
       <div className={styles.app}>
