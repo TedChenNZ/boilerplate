@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    // override tslint-react rules here
+    // "quotemark": [
+    //   true,
+    //   "single"
+    // ],
+    "member-access": false,
+    "no-console": false
+  }
+}
