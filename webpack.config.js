@@ -8,6 +8,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const envConfigCopier = require('./tools/envConfigCopier');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -106,6 +107,21 @@ if (!devMode) {
         to: envConfigCopier.envConfigProdDIR + envConfigCopier.envConfigFileName(),
       },
     ], {}),
-  ])
+  ]);
+
+  config.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            drop_console: true,
+            dead_code: true,
+            unused: true
+          }
+        }
+      })
+    ]
+  }
 }
+
 module.exports = config;
