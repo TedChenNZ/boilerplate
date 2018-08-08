@@ -6,6 +6,8 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const envConfigCopier = require('./tools/envConfigCopier');
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -33,7 +35,7 @@ const getStyleLoader = () => {
   return loader;
 };
 
-module.exports = {
+const config = {
   entry: {
     main: './src/index.tsx',
   },
@@ -88,6 +90,22 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js',
-    publicPath: '/',
+    publicPath: './',
   },
 };
+
+if (!devMode) {
+  config.plugins = config.plugins.concat([
+    //copy public dir
+    new CopyWebpackPlugin([
+      { from: 'src/assets/', to: 'assets/' },
+    ], {}),
+    new CopyWebpackPlugin([
+      {
+        from: envConfigCopier.envConfigDIR + envConfigCopier.envConfigFileName(process.env.ENV || 'local'),
+        to: envConfigCopier.envConfigProdDIR + envConfigCopier.envConfigFileName(),
+      },
+    ], {}),
+  ])
+}
+module.exports = config;
