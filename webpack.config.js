@@ -87,16 +87,7 @@ const config = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new WebpackMd5Hash(),
-  ],
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
-    publicPath: './',
-  },
-};
 
-if (!devMode) {
-  config.plugins = config.plugins.concat([
     //copy public dir
     new CopyWebpackPlugin([
       { from: 'src/assets/', to: 'assets/' },
@@ -107,6 +98,17 @@ if (!devMode) {
         to: envConfigCopier.envConfigProdDIR + envConfigCopier.envConfigFileName(),
       },
     ], {}),
+  ],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash].js',
+    publicPath: '/',
+  },
+};
+
+if (!devMode) {
+  config.plugins = config.plugins.concat([
+
   ]);
 
   config.optimization = {
